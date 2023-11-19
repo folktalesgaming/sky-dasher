@@ -9,6 +9,8 @@ const JUMP_VELOCITY = -400.0
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var hasDoubledJumped = false
+var isDashing = false
+var isTurnedLeft = false
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -32,12 +34,21 @@ func _physics_process(delta):
 		animated_sprite_2d.play("run")
 		if direction < 0:
 			animated_sprite_2d.flip_h = true
+			isTurnedLeft = true
 		else:
 			animated_sprite_2d.flip_h = false
-		if Input.is_action_just_pressed("ui_dash"):
-			velocity.x = direction * SPEED * 10
+			isTurnedLeft = false
 	else:
 		animated_sprite_2d.play("idle")
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-
+	
+	if Input.is_action_just_pressed("ui_dash") and not isDashing:
+		#isDashing = true
+		if isTurnedLeft:
+			velocity.x = -1 * SPEED * 10
+		else:
+			velocity.x = SPEED * 10
+		#await get_tree().create_timer(0.3).timeout
+		#isDashing = false
+		
 	move_and_slide()
