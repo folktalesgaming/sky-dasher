@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Sky Dasher"
-run/main_scene="res://Scenes/game_play.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep_height"
 
 [input]
 
