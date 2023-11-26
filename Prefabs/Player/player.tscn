@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://b7dq6hnvbgxqv"]
+
+[ext_resource type="Script" path="res://Prefabs/Player/player.gd" id="1_t5qmm"]
+[ext_resource type="Texture2D" uid="uid://chf34yetdcxs" path="res://Assets/Tiles/tile_0045.png" id="2_jw1l0"]
+[ext_resource type="Texture2D" uid="uid://b8trv6wwarvmu" path="res://Assets/Tiles/tile_0046.png" id="3_4juk5"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u7aca"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_84rh8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jw1l0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jw1l0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4juk5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_jw1l0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4juk5")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(54, 259)
+script = ExtResource("1_t5qmm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_u7aca")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_84rh8")
+animation = &"run"
